@@ -166,9 +166,14 @@ class _ImageTargetBoxState extends State<ImageTargetBox> {
           ));
         } else {
 
+          child = Container(width: 80, height: 80, color: Colors.red);
+
           Timer(Duration(seconds: 2), () {
             setState(() {
-              child = Container(width: 80, height: 80, color: Colors.red);
+              child = DottedBorder(
+                color: Colors.red.shade300,
+                child: const SizedBox(width: 80, height: 80),
+              );
             });
           });
 
