@@ -97,32 +97,7 @@ class FarsiWordGameScreen extends StatelessWidget {
     final context = BuildContext,
     // final Widget? child = null
   }) {
-    Widget child = DottedBorder(
-      child: Container(
-        width: 80,
-        height: 80,
-      ),
-        color: Colors.red.shade300,
-    );
-    return DragTarget<String>(
-      builder: (context, candidateData, rejectedData) {
-        return child;
-      },
-      onAccept: (data) {
-        if (data == 'assets/images/S-Main-2.png') {
-          child = Image.asset('assets/images/S-Main-2.png', width: 80, height: 80);
-
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("You got it :-))))"),
-          ));
-        } else {
-
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("Try again :-))))"),
-          ));
-        }
-      },
-    );
+    return ImageTargetBox();
   }
 
   Widget _buildWordList() {
@@ -151,6 +126,57 @@ class FarsiWordGameScreen extends StatelessWidget {
           ),
         );
       }).toList(),
+    );
+  }
+}
+
+@immutable
+class ImageTargetBox extends StatefulWidget {
+  const ImageTargetBox({super.key});
+
+  @override
+  State<ImageTargetBox> createState() => _ImageTargetBoxState();
+}
+
+class _ImageTargetBoxState extends State<ImageTargetBox> {
+  late Widget child;
+
+  @override
+  void initState() {
+    child = DottedBorder(
+      color: Colors.red.shade300,
+      child: const SizedBox(width: 80, height: 80),
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DragTarget<String>(
+      builder: (context, candidateData, rejectedData) {
+        return child;
+      },
+      onAccept: (data) {
+        if (data == 'assets/images/S-Main-2.png') {
+          child =
+              Image.asset('assets/images/S-Main-2.png', width: 80, height: 80);
+
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("You got it :-))))"),
+          ));
+        } else {
+
+          Timer(Duration(seconds: 2), () {
+            setState(() {
+              child = Container(width: 80, height: 80, color: Colors.red);
+            });
+          });
+
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Try again :-))))"),
+          ));
+        }
+      },
     );
   }
 }
