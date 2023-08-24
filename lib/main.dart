@@ -53,7 +53,7 @@ class FarsiWordGameScreen extends StatelessWidget {
                     Container(
                       height: 80,
                       width: 80,
-                      decoration: const BoxDecoration(color: Colors.amber),
+                      decoration: const BoxDecoration(color: Colors.white),
                       child: Image.asset('assets/images/S-Main-1.png'),
                     ),
                     SizedBox(width: 2),
@@ -68,14 +68,14 @@ class FarsiWordGameScreen extends StatelessWidget {
                     Container(
                       height: 80,
                       width: 80,
-                      decoration: const BoxDecoration(color: Colors.red),
+                      decoration: const BoxDecoration(color: Colors.white),
                       child: Image.asset('assets/images/S-Main-4.png'),
                     ),
                     SizedBox(width: 2),
                     Container(
                       height: 80,
                       width: 80,
-                      decoration: const BoxDecoration(color: Colors.lightGreen),
+                      decoration: const BoxDecoration(color: Colors.white),
                       child: Image.asset('assets/images/S-main-3.png'),
                     ),
                   ],
@@ -120,33 +120,27 @@ class FarsiWordGameScreen extends StatelessWidget {
   }
 
   Widget _buildWordList() {
-    // Replace this with your list of Farsi words
-    List<String> farsiWords = ['Word 1', 'Word 2', 'Word 3', 'Word 4'];
+    // Image names
+    List<String> images = [
+      "assets/images/S-Main-1.png",
+      "assets/images/S-Main-2.png", // the correct one
+      "assets/images/S-Main-4.png"
+    ];
 
     return Column(
-      children: farsiWords.map((word) {
+      children: images.map((image) {
         return ListTile(
-          title: Text(word),
           trailing: Draggable<String>(
-            data: word,
+            data: image,
             feedback: Material(
               child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(word),
+                child: Image.asset(image),
               ),
             ),
             childWhenDragging: Container(),
             child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(word),
+              margin: EdgeInsets.symmetric(vertical: 3),
+              child: Image.asset(image),
             ),
           ),
         );
