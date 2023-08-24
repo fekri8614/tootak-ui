@@ -98,10 +98,6 @@ class FarsiWordGameScreen extends StatelessWidget {
         return Container(
           width: 80,
           height: 80,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            border: Border.all(),
-          ),
           child: Center(child: Text('Drop here')),
         );
       },
