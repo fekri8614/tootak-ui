@@ -56,7 +56,6 @@ class FarsiWordGameScreen extends StatelessWidget {
                     Container(
                       height: 80,
                       width: 80,
-                      decoration: const BoxDecoration(color: Colors.white),
                       child: Image.asset('assets/images/S-Main-1.png'),
                     ),
                     SizedBox(width: 2),
@@ -71,14 +70,12 @@ class FarsiWordGameScreen extends StatelessWidget {
                     Container(
                       height: 80,
                       width: 80,
-                      decoration: const BoxDecoration(color: Colors.white),
                       child: Image.asset('assets/images/S-Main-4.png'),
                     ),
                     SizedBox(width: 2),
                     Container(
                       height: 80,
                       width: 80,
-                      decoration: const BoxDecoration(color: Colors.white),
                       child: Image.asset('assets/images/S-main-3.png'),
                     ),
                   ],
