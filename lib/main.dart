@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -92,21 +95,28 @@ class FarsiWordGameScreen extends StatelessWidget {
 
   Widget _buildDragTargetBox({
     final context = BuildContext,
+    // final Widget? child = null
   }) {
+    Widget child = DottedBorder(
+      child: Container(
+        width: 80,
+        height: 80,
+      ),
+        color: Colors.red.shade300,
+    );
     return DragTarget<String>(
       builder: (context, candidateData, rejectedData) {
-        return Container(
-          width: 80,
-          height: 80,
-          child: Center(child: Text('Drop here')),
-        );
+        return child;
       },
       onAccept: (data) {
         if (data == 'assets/images/S-Main-2.png') {
+          child = Image.asset('assets/images/S-Main-2.png', width: 80, height: 80);
+
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("You got it :-))))"),
           ));
         } else {
+
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Try again :-))))"),
           ));
@@ -120,7 +130,7 @@ class FarsiWordGameScreen extends StatelessWidget {
     List<String> images = [
       "assets/images/S-Main-1.png",
       "assets/images/S-Main-2.png", // the correct one
-      "assets/images/S-Main-4.png"
+      "assets/images/S-Main-4.png",
     ];
 
     return Column(
