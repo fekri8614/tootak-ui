@@ -28,14 +28,20 @@ class FarsiWordGameApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: FarsiWordGameScreen(),
     );
   }
 }
 
 class FarsiWordGameScreen extends StatelessWidget {
-  const FarsiWordGameScreen({super.key});
+  FarsiWordGameScreen({super.key});
+
+  final firstImages = [
+    "assets/images/S-Main-1.png",
+    "assets/images/S-Main-2.png", // the correct one
+    "assets/images/S-Main-4.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +89,7 @@ class FarsiWordGameScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            _buildWordList(),
+            _buildWordList(firstImages),
           ],
         ),
       ),
@@ -97,19 +103,17 @@ class FarsiWordGameScreen extends StatelessWidget {
       isSCompleted: (isSCompleted) {
         if (isSCompleted == true) {
           // start a new game
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Hey yooo :-))'),
+            ),
+          );
         }
       },
     );
   }
 
-  Widget _buildWordList() {
-    // Image names
-    List<String> images = [
-      "assets/images/S-Main-1.png",
-      "assets/images/S-Main-2.png", // the correct one
-      "assets/images/S-Main-4.png",
-    ];
-
+  Widget _buildWordList(List<String> images) {
     return Column(
       children: images.map((image) {
         return ListTile(
