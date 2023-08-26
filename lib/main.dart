@@ -92,9 +92,14 @@ class FarsiWordGameScreen extends StatelessWidget {
 
   Widget _buildDragTargetBox({
     final context = BuildContext,
-    // final Widget? child = null
   }) {
-    return ImageTargetBox();
+    return ImageTargetBox(
+      isSCompleted: (isSCompleted) {
+        if (isSCompleted == true) {
+          // start a new game
+        }
+      },
+    );
   }
 
   Widget _buildWordList() {
@@ -115,7 +120,11 @@ class FarsiWordGameScreen extends StatelessWidget {
                 child: Image.asset(image),
               ),
             ),
-            childWhenDragging: Container(),
+            childWhenDragging: Container(
+              width: 80,
+              height: 80,
+              color: Colors.transparent,
+            ),
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 3),
               child: Image.asset(image),
@@ -129,7 +138,9 @@ class FarsiWordGameScreen extends StatelessWidget {
 
 @immutable
 class ImageTargetBox extends StatefulWidget {
-  const ImageTargetBox({super.key});
+  const ImageTargetBox({super.key, required this.isSCompleted});
+
+  final Function(bool) isSCompleted;
 
   @override
   State<ImageTargetBox> createState() => _ImageTargetBoxState();
@@ -158,14 +169,11 @@ class _ImageTargetBoxState extends State<ImageTargetBox> {
           child =
               Image.asset('assets/images/S-Main-2.png', width: 80, height: 80);
 
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("You got it :-))))"),
-          ));
+          widget.isSCompleted(true);
         } else {
+          child = Container(width: 80, height: 80, color: Colors.red.shade200);
 
-          child = Container(width: 80, height: 80, color: Colors.red);
-
-          Timer(Duration(seconds: 2), () {
+          Timer(const Duration(seconds: 2), () {
             setState(() {
               child = DottedBorder(
                 color: Colors.red.shade300,
@@ -174,9 +182,7 @@ class _ImageTargetBoxState extends State<ImageTargetBox> {
             });
           });
 
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("Try again :-))))"),
-          ));
+          widget.isSCompleted(false);
         }
       },
     );
